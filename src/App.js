@@ -5,12 +5,8 @@ function App() {
   const globalState = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const increase = () => {
-    dispatch({ type: "increase", payload: 2 });
-  };
-
-  const decrease = () => {
-    dispatch({ type: "decrease", payload: 2 });
+  const counterOperation = (type, payload) => {
+    dispatch({ type, payload });
   };
 
   const toggleCounter = () => {
@@ -23,8 +19,12 @@ function App() {
         <>
           <h1>Counter: {globalState.value}</h1>
           <div>
-            <button onClick={increase}>increase</button>
-            <button onClick={decrease}>decrease</button>
+            <button onClick={() => counterOperation("increase", 2)}>
+              increase
+            </button>
+            <button onClick={() => counterOperation("decrease", 2)}>
+              decrease
+            </button>
           </div>
         </>
       )}
