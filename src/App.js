@@ -1,35 +1,25 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
+import { increase, decrease, toggleCounter } from "./store";
 
 function App() {
-  const globalState = useSelector((state) => state);
+  const value = useSelector((state) => state.value);
+  const showCounter = useSelector((state) => state.showCounter);
   const dispatch = useDispatch();
-
-  const counterOperation = (type, payload) => {
-    dispatch({ type, payload });
-  };
-
-  const toggleCounter = () => {
-    dispatch({ type: "toggleCounter" });
-  };
 
   return (
     <main className="App">
-      {globalState.showCounter && (
+      {showCounter && (
         <>
-          <h1>Counter: {globalState.value}</h1>
+          <h1>Counter: {value}</h1>
           <div>
-            <button onClick={() => counterOperation("increase", 2)}>
-              increase
-            </button>
-            <button onClick={() => counterOperation("decrease", 2)}>
-              decrease
-            </button>
+            <button onClick={() => dispatch(increase(2))}>increase</button>
+            <button onClick={() => dispatch(decrease(2))}>decrease</button>
           </div>
         </>
       )}
-      <button onClick={toggleCounter}>
-        {globalState.showCounter ? "Hide Counter" : "Show Counter"}
+      <button onClick={() => dispatch(toggleCounter())}>
+        {showCounter ? "Hide Counter" : "Show Counter"}
       </button>
     </main>
   );
