@@ -1,10 +1,11 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { increase, decrease, toggleCounter } from "./store";
+import { increase, decrease } from "./store/counter";
+import { toggleCounter } from "./store/toggleCounter";
 
 function App() {
-  const value = useSelector((state) => state.value);
-  const showCounter = useSelector((state) => state.showCounter);
+  const value = useSelector((state) => state.counter.value);
+  const showCounter = useSelector((state) => state.toggleCounter.showCounter);
   const dispatch = useDispatch();
 
   return (
